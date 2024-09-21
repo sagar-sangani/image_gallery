@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_gallery/ui/views/home/home_view.dart';
+import 'package:image_gallery/ui/views/gallery/gallery_view.dart';
 
 class ImageGalleryApp extends StatelessWidget {
   const ImageGalleryApp({super.key});
@@ -10,7 +10,7 @@ class ImageGalleryApp extends StatelessWidget {
     return const GetMaterialApp(
       title: 'Image Gallery',
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      home: GalleryView(),
     );
   }
 }
