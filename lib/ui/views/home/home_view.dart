@@ -7,6 +7,12 @@ class HomeView extends StackedView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
 
   @override
+  HomeViewModel viewModelBuilder(
+    BuildContext context,
+  ) =>
+      HomeViewModel();
+
+  @override
   Widget builder(
     BuildContext context,
     HomeViewModel viewModel,
@@ -14,15 +20,12 @@ class HomeView extends StackedView<HomeViewModel> {
   ) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+          child: Text('hello'),
+        ),
       ),
     );
   }
-
-  @override
-  HomeViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
-      HomeViewModel();
 }
