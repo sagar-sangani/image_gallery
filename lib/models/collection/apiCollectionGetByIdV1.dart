@@ -3,16 +3,19 @@ part of 'collection.dart';
 class ApiCollectionGetByIdV1RequestQuery {
   int page;
   int perPage;
+  String type;
 
   ApiCollectionGetByIdV1RequestQuery({
     this.page = 1,
     this.perPage = 20,
+    this.type = 'photos',
   });
 
   Map<String, dynamic> toMap() {
     return {
       'page': page,
       'per_page': perPage,
+      'type': type,
     };
   }
 }

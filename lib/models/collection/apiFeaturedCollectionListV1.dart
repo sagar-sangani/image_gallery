@@ -3,19 +3,16 @@ part of 'collection.dart';
 class ApiFeaturedCollectionListV1RequestQuery {
   int page;
   int perPage;
-  String type;
 
   ApiFeaturedCollectionListV1RequestQuery({
     this.page = 1,
     this.perPage = 20,
-    this.type = 'photos',
   });
 
   Map<String, dynamic> toMap() {
     return {
       'page': page,
       'per_page': perPage,
-      'type': type,
     };
   }
 }
@@ -27,8 +24,6 @@ Future<ApiFeaturedCollectionListV1ResponseBody> apiFeaturedCollectionListV1({
     'collections/featured',
     query: query.toMap(),
   );
-
-  print(response);
 
   return ApiFeaturedCollectionListV1ResponseBody.fromMap(
       jsonDecode(response.body));
