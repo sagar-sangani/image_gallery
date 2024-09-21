@@ -27,7 +27,7 @@ class GalleryView extends StackedView<GalleryViewModel> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               color: Colors.transparent,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,24 +42,29 @@ class GalleryView extends StackedView<GalleryViewModel> {
                   ),
                   InkWell(
                     onTap: viewModel.handleCollectionButtonTap,
+                    splashColor: Colors.grey.shade300.withOpacity(0.1),
+                    highlightColor: Colors.grey.shade100.withOpacity(0.1),
+                    customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(28),
+                    ),
                     child: Container(
-                      // color: Colors.red,
-                      padding: EdgeInsets.all(8),
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(shape: BoxShape.circle),
                       child: Icon(
                         Icons.folder,
-                        color: Colors.white,
+                        size: 26,
+                        color: Colors.blue,
                       ),
                     ),
                   )
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: (viewModel.busy(viewModel.fetchCuratedPhotos) &&
-                        viewModel.curatedPhotosPage == 1)
+                child: viewModel.isInitialLoaderVisible
                     ? Center(
                         child: CircularProgressIndicator(
                           color: Colors.white,

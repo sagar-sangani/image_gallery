@@ -74,6 +74,13 @@ class GalleryViewModel extends BaseViewModel {
   }
 
   void handleCollectionButtonTap() {
-    Get.to(() => CollectionsView());
+    Get.to(
+      () => CollectionsView(),
+      transition: Transition.circularReveal,
+      duration: Duration(milliseconds: 800),
+    );
   }
+
+  bool get isInitialLoaderVisible =>
+      busy(fetchCuratedPhotos) && curatedPhotosPage == 1;
 }
