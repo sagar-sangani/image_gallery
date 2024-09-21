@@ -70,6 +70,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -85,23 +86,23 @@ flutter:
   fonts:
     - family: Metropolis
       fonts:
-        - asset: assets/fonts/Metropolis-Thin.ttf
+        - asset: assets/fonts/Metropolis-Thin.otf
           weight: 100
-        - asset: assets/fonts/Metropolis-ExtraLight.ttf
+        - asset: assets/fonts/Metropolis-ExtraLight.otf
           weight: 200
-        - asset: assets/fonts/Metropolis-Light.ttf
+        - asset: assets/fonts/Metropolis-Light.otf
           weight: 300
-        - asset: assets/fonts/Metropolis-Regular.ttf
+        - asset: assets/fonts/Metropolis-Regular.otf
           weight: 400
-        - asset: assets/fonts/Metropolis-Medium.ttf
+        - asset: assets/fonts/Metropolis-Medium.otf
           weight: 500
-        - asset: assets/fonts/Metropolis-SemiBold.ttf
+        - asset: assets/fonts/Metropolis-SemiBold.otf
           weight: 600
-        - asset: assets/fonts/Metropolis-Bold.ttf
+        - asset: assets/fonts/Metropolis-Bold.otf
           weight: 700
-        - asset: assets/fonts/Metropolis-ExtraBold.ttf
+        - asset: assets/fonts/Metropolis-ExtraBold.otf
           weight: 800
-        - asset: assets/fonts/Metropolis-Black.ttf
+        - asset: assets/fonts/Metropolis-Black.otf
           weight: 900
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
