@@ -106,9 +106,9 @@ class GalleryViewModel extends BaseViewModel {
 
   void handleCollectionButtonTap() {
     Get.to(
-      () => CollectionsView(),
+      () => const CollectionsView(),
       transition: Transition.topLevel,
-      duration: Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 800),
     );
   }
 

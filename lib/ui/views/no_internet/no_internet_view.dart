@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NoInternetView extends StatelessWidget {
+  const NoInternetView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,13 +21,13 @@ class NoInternetView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.wifi_off,
                   size: 100,
                   color: Colors.white,
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'No Internet Connection',
                   style: TextStyle(
                     color: Colors.white,
@@ -33,7 +35,7 @@ class NoInternetView extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(

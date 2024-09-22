@@ -47,10 +47,10 @@ class GalleryView extends StackedView<GalleryViewModel> {
                 !viewModel.isCollectionIconVisible ? true : false,
             centerTitle: false,
             title: Container(
-              padding: EdgeInsets.only(left: 6.0),
+              padding: const EdgeInsets.only(left: 6.0),
               child: Text(
                 (collection != null) ? collection!.title : "Gallery",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
@@ -67,9 +67,9 @@ class GalleryView extends StackedView<GalleryViewModel> {
                     borderRadius: BorderRadius.circular(28),
                   ),
                   child: Container(
-                    padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(shape: BoxShape.circle),
-                    child: Icon(
+                    padding: const EdgeInsets.all(15),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    child: const Icon(
                       Icons.folder,
                       size: 26,
                       color: Colors.blue,
@@ -87,9 +87,9 @@ class GalleryView extends StackedView<GalleryViewModel> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: viewModel.isInitialLoaderVisible
-                            ? Center(
+                            ? const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -97,8 +97,8 @@ class GalleryView extends StackedView<GalleryViewModel> {
                             : GridView.builder(
                                 controller:
                                     viewModel.galleryImageListScrollController,
-                                padding: EdgeInsets.only(top: 10),
-                                physics: BouncingScrollPhysics(
+                                padding: const EdgeInsets.only(top: 10),
+                                physics: const BouncingScrollPhysics(
                                     parent: AlwaysScrollableScrollPhysics()),
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
@@ -116,7 +116,7 @@ class GalleryView extends StackedView<GalleryViewModel> {
                                         viewModel.handlePhotoListItemTap(index),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(14),
-                                      child: Container(
+                                      child: SizedBox(
                                         width: double.infinity,
                                         child: Hero(
                                           tag:

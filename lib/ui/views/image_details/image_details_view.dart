@@ -18,7 +18,7 @@ class ImageDetailsView extends StackedView<ImageDetailsViewModel> {
   final ViewType viewType;
   final String? collectionId;
 
-  ImageDetailsView({
+  const ImageDetailsView({
     super.key,
     required this.curatedPhotos,
     required this.index,
@@ -58,13 +58,13 @@ class ImageDetailsView extends StackedView<ImageDetailsViewModel> {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Photo Clicked By',
                   style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
                 ),
                 Text(
                   viewModel.photographer,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
@@ -79,7 +79,8 @@ class ImageDetailsView extends StackedView<ImageDetailsViewModel> {
               children: [
                 Expanded(
                   child: PhotoViewGallery.builder(
-                    backgroundDecoration: BoxDecoration(color: Colors.black),
+                    backgroundDecoration:
+                        const BoxDecoration(color: Colors.black),
                     itemCount: viewModel.images.length,
                     onPageChanged: (index) =>
                         viewModel.handleImageChanged(index),

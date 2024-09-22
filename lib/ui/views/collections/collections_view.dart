@@ -35,7 +35,7 @@ class CollectionsView extends StackedView<CollectionsViewModel> {
           appBar: AppBar(
             backgroundColor: Colors.black26,
             foregroundColor: Colors.white,
-            title: Text(
+            title: const Text(
               "Collections",
               style: TextStyle(
                 fontSize: 24,
@@ -51,13 +51,13 @@ class CollectionsView extends StackedView<CollectionsViewModel> {
               bool isPortraitMode = orientation == Orientation.portrait;
               return SafeArea(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18),
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: viewModel.isInitialLoaderVisible
-                            ? Center(
+                            ? const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 ),
@@ -95,7 +95,7 @@ class CollectionsView extends StackedView<CollectionsViewModel> {
                                               viewModel.collections[index]
                                                   .photosCount
                                                   .toString(),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 16,
                                                 color: Color.fromARGB(
                                                     255, 9, 68, 127),
@@ -108,7 +108,7 @@ class CollectionsView extends StackedView<CollectionsViewModel> {
                                       Text(
                                         viewModel.collections[index].title,
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14,
                                           color: Colors.white,
                                         ),
