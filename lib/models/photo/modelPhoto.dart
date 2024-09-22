@@ -7,7 +7,7 @@ class Photo {
   String url;
   String photographer;
   String photographerUrl;
-  String photographerId;
+  int photographerId;
   String avgColor;
   PhotoSrc src;
   bool liked;
@@ -35,7 +35,7 @@ class Photo {
       url: map['url'].toString(),
       photographer: map['photographer'].toString(),
       photographerUrl: map['photographer_url'].toString(),
-      photographerId: map['photographer_id'].toString(),
+      photographerId: map['photographer_id'],
       avgColor: map['avg_color'].toString(),
       src: PhotoSrc.fromMap(map['src']),
       liked: map['liked'],
