@@ -10,6 +10,7 @@ class ImageGalleryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Image Gallery',
+      theme: ThemeData(fontFamily: 'Metropolis'),
       debugShowCheckedModeBanner: false,
       initialBinding: BindingsBuilder(() {
         Get.put(ConnectivityController());
