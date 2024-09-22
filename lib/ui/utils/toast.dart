@@ -7,11 +7,11 @@ Future<void> showToast({
 }) {
   var controller = Get.rawSnackbar(
     messageText: _BaseToast(text: text),
-    padding: EdgeInsets.only(top: 30, bottom: 40),
+    padding: const EdgeInsets.only(top: 30, bottom: 40),
     backgroundColor: Colors.transparent,
-    duration: Duration(seconds: 5),
+    duration: const Duration(seconds: 5),
     isDismissible: true,
-    animationDuration: Duration(milliseconds: 800),
+    animationDuration: const Duration(milliseconds: 800),
     reverseAnimationCurve: Curves.easeOut,
     snackPosition: SnackPosition.BOTTOM,
     dismissDirection: DismissDirection.horizontal,

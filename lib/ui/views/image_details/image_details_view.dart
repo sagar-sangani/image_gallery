@@ -48,7 +48,7 @@ class ImageDetailsView extends StackedView<ImageDetailsViewModel> {
     return Obx(
       () {
         if (!connectivityController.isConnected.value) {
-          return NoInternetView();
+          return const NoInternetView();
         }
         return Scaffold(
           backgroundColor: Colors.black26,

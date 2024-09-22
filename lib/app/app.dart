@@ -15,7 +15,7 @@ class ImageGalleryApp extends StatelessWidget {
       initialBinding: BindingsBuilder(() {
         Get.put(ConnectivityController());
       }),
-      home: GalleryView(),
+      home: const GalleryView(),
     );
   }
 }
