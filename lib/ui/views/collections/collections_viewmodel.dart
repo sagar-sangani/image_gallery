@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:image_gallery/models/collection/collection.dart';
-import 'package:image_gallery/ui/views/collection_details/collection_details_view.dart';
+import 'package:image_gallery/ui/utils/toast.dart';
+import 'package:image_gallery/ui/views/gallery/gallery_view.dart';
 import 'package:stacked/stacked.dart';
 
 class CollectionsViewModel extends BaseViewModel {
@@ -19,7 +20,7 @@ class CollectionsViewModel extends BaseViewModel {
   void handleScrollView() {
     if (_scrollDebounce?.isActive ?? false) _scrollDebounce?.cancel();
     _scrollDebounce = Timer(const Duration(milliseconds: 50), () {
-      if (collectionListScrollController.position.extentAfter <= 200) {
+      if (collectionListScrollController.position.extentAfter <= 400) {
         if (!isScrollEventDispatched) {
           handleCollectionListScrollEnd();
           isScrollEventDispatched = true;
@@ -54,16 +55,14 @@ class CollectionsViewModel extends BaseViewModel {
       }
       notifyListeners();
     } catch (e) {
-      print(e);
+      showToast(text: e.toString());
     } finally {
       setBusyForObject(getCollections, false);
     }
   }
 
   void handleCollectionListItemTap(Collection collection) {
-    Get.to(
-      () => CollectionDetailsView(collection: collection),
-    );
+    Get.to(() => GalleryView(collection: collection));
   }
 
   bool get isInitialLoaderVisible =>

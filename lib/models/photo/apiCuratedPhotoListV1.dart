@@ -47,8 +47,3 @@ class ApiCuratedPhotoListV1ResponseBody {
     );
   }
 }
-
-enum ViewType {
-  gallery,
-  collection,
-}

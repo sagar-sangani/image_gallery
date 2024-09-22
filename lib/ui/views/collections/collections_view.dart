@@ -37,51 +37,83 @@ class CollectionsView extends StackedView<CollectionsViewModel> {
         centerTitle: false,
       ),
       backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: viewModel.isInitialLoaderVisible
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    )
-                  : GridView.builder(
-                      controller: viewModel.collectionListScrollController,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        childAspectRatio: 1.2,
-                      ),
-                      itemCount: viewModel.collections.length,
-                      itemBuilder: (context, index) => InkWell(
-                        onTap: () => viewModel.handleCollectionListItemTap(
-                            viewModel.collections[index]),
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(
-                              "assets/icons/folder_icon.svg",
-                              height: 70,
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          bool isPortraitMode = orientation == Orientation.portrait;
+          return SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: viewModel.isInitialLoaderVisible
+                        ? Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
                             ),
-                            const SizedBox(height: 12),
-                            Text(
-                              viewModel.collections[index].title,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.white,
+                          )
+                        : GridView.builder(
+                            controller:
+                                viewModel.collectionListScrollController,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: isPortraitMode ? 2 : 4,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                              childAspectRatio: 1.2,
+                            ),
+                            itemCount: viewModel.collections.length,
+                            itemBuilder: (context, index) => InkWell(
+                              onTap: () =>
+                                  viewModel.handleCollectionListItemTap(
+                                      viewModel.collections[index]),
+                              customBorder: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28),
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/icons/folder_icon.svg",
+                                        height: 70,
+                                      ),
+                                      Positioned(
+                                        top: 28,
+                                        child: Text(
+                                          viewModel
+                                              .collections[index].photosCount
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color:
+                                                Color.fromARGB(255, 9, 68, 127),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    viewModel.collections[index].title,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
