@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_gallery/services/connectivity_service.dart';
 import 'package:image_gallery/ui/views/gallery/gallery_view.dart';
 
 class ImageGalleryApp extends StatelessWidget {
@@ -7,9 +8,12 @@ class ImageGalleryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: 'Image Gallery',
       debugShowCheckedModeBanner: false,
+      initialBinding: BindingsBuilder(() {
+        Get.put(ConnectivityController());
+      }),
       home: GalleryView(),
     );
   }

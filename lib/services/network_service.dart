@@ -7,7 +7,6 @@ class NetworkService {
     String token = 'Mb8gRTNzvT3L08KJFvrxLhMiSt3TRBBNvqlRZU3HPWnyFrq9E3uYEdvy';
 
     return {
-      // 'Content-Type': 'application/json',
       'Authorization': token,
     };
   }
