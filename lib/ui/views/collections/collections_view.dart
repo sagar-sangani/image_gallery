@@ -29,7 +29,7 @@ class CollectionsView extends StackedView<CollectionsViewModel> {
     return Obx(
       () {
         if (!connectivityController.isConnected.value) {
-          return NoInternetView();
+          return const NoInternetView();
         }
         return Scaffold(
           appBar: AppBar(
@@ -50,6 +50,7 @@ class CollectionsView extends StackedView<CollectionsViewModel> {
             builder: (context, orientation) {
               bool isPortraitMode = orientation == Orientation.portrait;
               return SafeArea(
+                bottom: false,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
@@ -111,6 +112,7 @@ class CollectionsView extends StackedView<CollectionsViewModel> {
                                         style: const TextStyle(
                                           fontSize: 14,
                                           color: Colors.white,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       )
                                     ],
