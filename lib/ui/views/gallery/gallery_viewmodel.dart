@@ -3,28 +3,31 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:image_gallery/models/collection/collection.dart';
+import 'package:image_gallery/models/enum.dart';
 import 'package:image_gallery/models/photo/photo.dart';
+import 'package:image_gallery/ui/utils/toast.dart';
 import 'package:image_gallery/ui/views/collections/collections_view.dart';
 import 'package:image_gallery/ui/views/image_details/image_details_view.dart';
 import 'package:stacked/stacked.dart';
 
 class GalleryViewModel extends BaseViewModel {
-  List<Photo> curatedPhotos = [];
-  List<Collection> collections = [];
+  Collection? collection;
 
-  GalleryViewModel() {
-    curatedPhotoListScrollController.addListener(handleScrollView);
+  GalleryViewModel({this.collection}) {
+    galleryImageListScrollController.addListener(handleScrollView);
   }
+
+  List<Photo> galleryImages = [];
+  ScrollController galleryImageListScrollController = ScrollController();
 
   Timer? _scrollDebounce;
   bool isScrollEventDispatched = false;
-  ScrollController curatedPhotoListScrollController = ScrollController();
   void handleScrollView() {
     if (_scrollDebounce?.isActive ?? false) _scrollDebounce?.cancel();
     _scrollDebounce = Timer(const Duration(milliseconds: 50), () {
-      if (curatedPhotoListScrollController.position.extentAfter <= 200) {
+      if (galleryImageListScrollController.position.extentAfter <= 400) {
         if (!isScrollEventDispatched) {
-          handleCuratedPhotoListScrollEnd();
+          handleGalleryImageListScrollEnd();
           isScrollEventDispatched = true;
         }
       } else {
@@ -33,32 +36,60 @@ class GalleryViewModel extends BaseViewModel {
     });
   }
 
-  int curatedPhotosPage = 1;
+  int galleryImagesPage = 1;
 
-  Future<void> handleCuratedPhotoListScrollEnd() async {
-    curatedPhotosPage++;
-    await fetchCuratedPhotos(isPaginated: true);
+  Future<void> handleGalleryImageListScrollEnd() async {
+    galleryImagesPage++;
+    if (collection != null) {
+      await getCollectionById(isPaginated: true);
+    } else {
+      await fetchCuratedPhotos(isPaginated: true);
+    }
   }
 
   Future<void> fetchCuratedPhotos({bool isPaginated = false}) async {
     setBusyForObject(fetchCuratedPhotos, true);
     try {
-      final morePage = curatedPhotos.length % 20 == 0;
+      final morePage = galleryImages.length % 20 == 0;
 
       if (!morePage && isPaginated) return;
       var response = await apiCuratedPhotoListV1(
-        query: ApiCuratedPhotoListV1RequestQuery(page: curatedPhotosPage),
+        query: ApiCuratedPhotoListV1RequestQuery(page: galleryImagesPage),
       );
       if (isPaginated) {
-        curatedPhotos.addAll(response.photos);
+        galleryImages.addAll(response.photos);
       } else {
-        curatedPhotos = response.photos;
+        galleryImages = response.photos;
       }
       notifyListeners();
     } catch (e) {
-      print(e);
+      showToast(text: e.toString());
     } finally {
       setBusyForObject(fetchCuratedPhotos, false);
+    }
+  }
+
+  Future<void> getCollectionById({bool isPaginated = false}) async {
+    setBusyForObject(getCollectionById, true);
+    try {
+      final morePage = galleryImages.length % 20 == 0;
+
+      if (!morePage && isPaginated) return;
+      var response = await apiCollectionGetByIdV1(
+        query: ApiCollectionGetByIdV1RequestQuery(page: galleryImagesPage),
+        collectionId: collection!.id,
+      );
+
+      if (isPaginated) {
+        galleryImages.addAll(response.media);
+      } else {
+        galleryImages = response.media;
+      }
+      notifyListeners();
+    } catch (e) {
+      showToast(text: e.toString());
+    } finally {
+      setBusyForObject(getCollectionById, false);
     }
   }
 
@@ -66,8 +97,8 @@ class GalleryViewModel extends BaseViewModel {
     Get.to(
       () => ImageDetailsView(
         index: selectedImageIndex,
-        curatedPhotos: curatedPhotos,
-        currentPage: curatedPhotosPage,
+        curatedPhotos: galleryImages,
+        currentPage: galleryImagesPage,
         viewType: ViewType.gallery,
       ),
     );
@@ -76,11 +107,22 @@ class GalleryViewModel extends BaseViewModel {
   void handleCollectionButtonTap() {
     Get.to(
       () => CollectionsView(),
-      transition: Transition.circularReveal,
+      transition: Transition.topLevel,
       duration: Duration(milliseconds: 800),
     );
   }
 
+  void fetchImages() {
+    if (collection != null) {
+      getCollectionById();
+    } else {
+      fetchCuratedPhotos();
+    }
+  }
+
   bool get isInitialLoaderVisible =>
-      busy(fetchCuratedPhotos) && curatedPhotosPage == 1;
+      ((busy(fetchCuratedPhotos) || busy(getCollectionById)) &&
+          galleryImagesPage == 1);
+
+  bool get isCollectionIconVisible => collection == null;
 }
